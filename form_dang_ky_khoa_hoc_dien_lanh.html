@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Đăng ký Khóa học Điện lạnh</title>
+</head>
+<body>
+  <h1>Đăng ký học kinh doanh điện lạnh</h1>
+  <form id="registerForm">
+    <label>Họ tên:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Số điện thoại (Zalo):</label><br>
+    <input type="tel" name="phone" required><br><br>
+
+    <label>Tỉnh/Thành phố:</label><br>
+    <input type="text" name="location"><br><br>
+
+    <label>Bạn từng làm điện lạnh chưa?</label><br>
+    <select name="experience">
+      <option value="Chưa từng">Chưa từng</option>
+      <option value="Đã học sơ qua">Đã học sơ qua</option>
+      <option value="Đang làm phụ / thợ">Đang làm phụ / thợ</option>
+    </select><br><br>
+
+    <label>Mục tiêu thu nhập:</label><br>
+    <select name="goal">
+      <option value="10–20 triệu/tháng">10–20 triệu/tháng</option>
+      <option value="Muốn tự kinh doanh">Muốn tự kinh doanh</option>
+      <option value="Tìm nghề ổn định, lâu dài">Tìm nghề ổn định, lâu dài</option>
+    </select><br><br>
+
+    <button type="submit">🚀 Đăng ký ngay</button>
+  </form>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = {
+        name: this.name.value,
+        phone: this.phone.value,
+        location: this.location.value,
+        experience: this.experience.value,
+        goal: this.goal.value
+      };
+
+      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbxFJ1-8xptno-smy8urEpIWht4QSaRG0ORAz8Ul7TXU9jOCF7YQloHSWSHKC_szBBDN/exec", {
+        method: "POST",
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.text())
+      .then(data => {
+        alert("Đăng ký thành công! Chuyển sang trang thanh toán.");
+        window.location.href = "thanh_toan.html";
+      })
+      .catch(err => alert("Lỗi khi gửi thông tin: " + err));
+    });
+  </script>
+</body>
+</html>

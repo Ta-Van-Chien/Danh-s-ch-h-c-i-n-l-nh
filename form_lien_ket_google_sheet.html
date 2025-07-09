@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký học điện lạnh</title>
+</head>
+<body>
+  <h2>Đăng ký học kinh doanh điện lạnh</h2>
+  <form id="dangky">
+    <input type="text" name="name" placeholder="Họ tên" required><br><br>
+    <input type="text" name="phone" placeholder="SĐT Zalo" required><br><br>
+    <input type="text" name="location" placeholder="Tỉnh/Thành phố"><br><br>
+    <select name="experience">
+      <option value="Chưa từng">Chưa từng</option>
+      <option value="Đã học sơ qua">Đã học sơ qua</option>
+      <option value="Đang làm phụ/thợ">Đang làm phụ/thợ</option>
+    </select><br><br>
+    <select name="goal">
+      <option value="10-20tr/tháng">10-20tr/tháng</option>
+      <option value="Muốn tự kinh doanh">Muốn tự kinh doanh</option>
+      <option value="Ổn định lâu dài">Ổn định lâu dài</option>
+    </select><br><br>
+    <button type="submit">Đăng ký ngay</button>
+  </form>
+
+  <script>
+    document.getElementById('dangky').addEventListener('submit', function(e){
+      e.preventDefault();
+      const formData = {
+        name: this.name.value,
+        phone: this.phone.value,
+        location: this.location.value,
+        experience: this.experience.value,
+        goal: this.goal.value
+      };
+
+      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbxFJ1-8xptno-smy8urEpIWht4QSaRG0ORAz8Ul7TXU9jOCF7YQloHSWSHKC_szBBDN/exec", {
+        method: "POST",
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert("Đăng ký thành công! Chúng tôi sẽ liên hệ sớm.");
+        this.reset();
+      })
+      .catch(error => {
+        alert("Có lỗi xảy ra: " + error);
+      });
+    });
+  </script>
+</body>
+</html>
